@@ -4,10 +4,10 @@
 #include "linked_list.h"
 #include <math.h>
 
-void push_in_queue(int r, int c, char grid[r][c], int, int, int , que **);
-void find_path(int r, int c, char grid[r][c], int, int, int , que **, int **);
-list_t *dfs(int r, int c, char[r][c]);
-list_t *astar(int r, int c, char[r][c]);
+void push_in_queue(int r, int c, char **grid, int, int, int , que **);
+void find_path(int r, int c, char **grid, int, int, int , que **, int **);
+list_t *dfs(int r, int c, char**);
+list_t *astar(int r, int c, char**);
 double find_distance(int, int, int, int);
 void skip(list_t *, node_t *);
 list_t *invert(list_t *);
@@ -20,7 +20,7 @@ double find_distance(int r, int c, int curr_r, int curr_c)
     return sqrt((a * a) + (b * b));
 }
 
-void find_path(int r, int c, char grid[r][c], int curr_r, int curr_c, int dir,  que **queue, int **visited)
+void find_path(int r, int c, char **grid, int curr_r, int curr_c, int dir,  que **queue, int **visited)
 {
     node_t *el = NULL;
 
@@ -57,7 +57,7 @@ void find_path(int r, int c, char grid[r][c], int curr_r, int curr_c, int dir,  
         visited[curr_r - 1][curr_c] = 1;
     }
 }
-void push_in_queue(int r, int c, char grid[r][c], int curr_r, int curr_c, int dir,  que **queue)
+void push_in_queue(int r, int c, char **grid, int curr_r, int curr_c, int dir,  que **queue)
 {
     node_t *el = NULL;
     if(dir == 1)
@@ -173,7 +173,7 @@ void push_in_queue(int r, int c, char grid[r][c], int curr_r, int curr_c, int di
     free(el);
 }
 
-list_t *dfs(int r, int c, char grid[r][c]) {
+list_t *dfs(int r, int c, char **grid) {
     node_t *new_el = init_node(0, 0, 0, 0, 1);
 
     list_t *list = init_list(0, 0);
@@ -213,7 +213,7 @@ list_t *dfs(int r, int c, char grid[r][c]) {
 }
 
 
-list_t *astar(int r, int c, char grid[r][c]) {
+list_t *astar(int r, int c, char **grid) {
     node_t *new_el = init_node(0, 0, 0, 0, 1);
 
     list_t *list = init_list(0, 0);
