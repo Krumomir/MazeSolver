@@ -243,6 +243,10 @@ list_t *astar(int r, int c, char grid[r][c]) {
     }
 
     list_t *result = invert(list);
+
+    result->tail = result->tail->prev;
+    free(result->tail->next);
+    result->tail->next = NULL;
     free_list(list);
 
     return result;
